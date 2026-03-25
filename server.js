@@ -34,6 +34,22 @@ app.post("/create-post", upload.single("image"), async (req, res) => {
   }
 });
 
+app.get("/posts",async (req,res)=>{
+  try{
+    const posts= await Post.find();
+    res.status(200).json({
+      message:"Fetching successful",
+      data:posts
+    })
+
+  }catch(err){
+    res.status(500).json({ error: error.message });
+
+  }
+
+
+})
+
 app.listen(3000, () => {
   console.log(`http://localhost:3000`);
 });
